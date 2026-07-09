@@ -10,7 +10,8 @@ import validators
 
 # Enable logging
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", 
+    level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
@@ -32,13 +33,16 @@ I can help you with:
 🔗 **URL Shortener** - Shorten long URLs instantly
 📊 **Word Counter** - Count words, characters, and sentences
 
-Commands:
-/convert - Convert an image (send me an image first)
-/shorten - Shorten a URL (send me a link first)
-/count - Count words in text (send me text first)
-/help - Show this message again
+**How to use:**
+• Send me an **image** → I'll convert it
+• Send me a **URL** → I'll shorten it
+• Send me **text** → I'll count words
 
-Just send me an image, URL, or text and I'll suggest actions!
+Commands:
+/start - Show this message
+/help - Get help
+
+Just send me anything and I'll handle it! 🚀
     """
     await update.message.reply_text(welcome_text, parse_mode="Markdown")
 
@@ -116,13 +120,13 @@ async def show_word_count(message, text):
     result = f"""
 📊 **Word Count Results**
 
-📝 Words: {word_count}
-📖 Characters (with spaces): {char_count}
-✏️ Characters (without spaces): {char_no_spaces}
-📄 Sentences: {sentence_count}
-📑 Paragraphs: {paragraph_count}
+📝 **Words:** {word_count}
+📖 **Characters (with spaces):** {char_count}
+✏️ **Characters (without spaces):** {char_no_spaces}
+📄 **Sentences:** {sentence_count}
+📑 **Paragraphs:** {paragraph_count}
 
-Want me to shorten a URL too? Just send me a link!
+💡 Send me a URL to shorten it too!
     """
     await message.reply_text(result, parse_mode="Markdown")
 
@@ -187,8 +191,8 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 short_url = response.json().get('short_url')
                 await query.edit_message_text(
                     f"🔗 **Shortened URL**\n\n"
-                    f"Original: {url}\n"
-                    f"Shortened: {short_url}\n\n"
+                    f"**Original:** {url}\n"
+                    f"**Shortened:** {short_url}\n\n"
                     f"✅ Click the link above to visit the shortened URL!"
                 )
             else:
